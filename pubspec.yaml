@@ -1,32 +1,34 @@
-name: your_project_name
+name: spark
 description: A Flutter app for IoT device discovery and control.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.7.0 <4.0.0'
+  sdk: '>=3.7.0 <4.0.0' # Ensure your SDK is within this range or update it
 
 dependencies:
   flutter:
     sdk: flutter
-  fl_chart: ^0.63.0
-  http: ^0.13.4
-  universal_html: ^2.0.8
-  multicast_dns: 0.3.3
-  flutter_svg: ^2.0.9
-  cloud_firestore: ^5.6.6
+  fl_chart: ^0.71.0
+  http: ^1.4.0 # Used for network requests, potentially in other parts of the app
+  universal_html: ^2.0.8 # Might be used by other packages, keep if present
+  multicast_dns: ^0.3.3 # Used for mDNS discovery on non-Windows platforms
+  flutter_svg: ^2.0.9 # Used for rendering SVG icons
+  cloud_firestore: ^5.6.7 # Ensure this version is compatible with your Firebase setup
   cupertino_icons: ^1.0.8
-  firebase_core: ^3.13.0
-  firebase_auth: ^5.5.3
-  google_sign_in: ^6.1.0
-  shared_preferences: ^2.0.0
-  provider: ^6.0.0
-  intl: ^0.20.2
+  firebase_core: ^3.13.0 # Ensure this version is compatible with your Firebase setup
+  firebase_auth: ^5.5.3 # Changed firebase_auth version to 4.15.0
+  google_sign_in: ^6.2.1 # Ensure this version is compatible with your Firebase setup
+  shared_preferences: ^2.2.3 # Might be used for local storage
+  provider: ^6.0.5 # Used for state management
+  intl: ^0.20.2 # Added for DateFormat and NumberFormat
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^5.0.0 # Recommended for linting
+
 flutter:
   uses-material-design: true
   assets:
-    - assets/icons/
-    - assets/logo.png
+    - assets/icons/ # Ensure your SVG icons are in this folder
+    - assets/logo.png # Ensure your logo is here

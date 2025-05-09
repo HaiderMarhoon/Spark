@@ -39,7 +39,10 @@ class MyApp extends StatelessWidget {
       title: 'SPARK App',
       debugShowCheckedModeBanner: false,
       theme: _buildAppTheme(),
-      initialRoute: '/splash',
+      // --- MODIFIED: Change initialRoute to '/home' to skip auth for testing ---
+      // Original: initialRoute: '/splash',
+      initialRoute: '/home',
+      // ----------------------------------------------------------------------
       routes: _buildAppRoutes(),
       navigatorObservers: [RouteObserver<PageRoute>()],
     );
@@ -78,12 +81,18 @@ class MyApp extends StatelessWidget {
       '/login': (context) => const LoginScreen(),
       '/register': (context) => const RegisterScreen(),
       '/otp': (context) {
+        // Note: This route might not work correctly without proper arguments
+        // if accessed directly without the phone verification flow.
         final args = ModalRoute.of(context)!.settings.arguments as Map;
         return OTPScreen(
-          userEmail: '', userId: '',
+          userEmail: '', // Placeholder
+          userId: '', // Placeholder
         );
       },
-      '/home': (context) => const HomeScreen(userId: '', userEmail: '',),
+      // --- MODIFIED: Provide placeholder arguments for the /home route when skipping auth ---
+      // Original: '/home': (context) => const HomeScreen(userId: '', userEmail: '',),
+      '/home': (context) => const HomeScreen(userId: 'placeholder_user_id', userEmail: 'placeholder@example.com'),
+      // ------------------------------------------------------------------------------------
     };
   }
 }

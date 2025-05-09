@@ -1,0 +1,570 @@
+# Nmap 7.96 scan initiated Sat May 10 00:37:04 2025 as: "C:\\Program Files (x86)\\Nmap\\nmap.exe" -p 22,80,443,8080,8000,3389 -sV -T4 --noninteractive --system-dns -oJ - 192.168.0.0/24
+Failed to resolve "-".
+Bare '-': did you put a space between '--'?
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+System DNS resolution of Uninitialized request could not be performed.
+
+Nmap scan report for 192.168.0.1
+Host is up (0.026s latency).
+
+PORT     STATE  SERVICE       VERSION
+22/tcp   open   ssh           Dropbear sshd 2012.55 (protocol 2.0)
+80/tcp   open   http          Router Webserver
+443/tcp  closed https
+3389/tcp closed ms-wbt-server
+8000/tcp closed http-alt
+8080/tcp closed http-proxy
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.96%I=7%D=5/10%Time=681E7593%P=i686-pc-windows-windows%r(
+SF:GetRequest,1EF1,"HTTP/1\.1\x20200\x20OK\r\nServer:\x20Router\x20Webserv
+SF:er\r\nConnection:\x20close\r\nContent-Type:\x20text/html\r\nWWW-Authent
+SF:icate:\x20Basic\x20realm=\"TP-Link\x20Wireless\x20N\x20Router\x20WR940N
+SF:\"\r\n\r\n<!DOCTYPE\x20html>\n<META\x20http-equiv=Content-Type\x20conte
+SF:nt=\"text/html;\x20charset=iso-8859-1\">\n<HTML>\n<HEAD><TITLE>TL-WR940
+SF:N</TITLE>\n<META\x20http-equiv=Pragma\x20content=no-cache>\n<META\x20ht
+SF:tp-equiv=Expires\x20content=\"wed,\x2026\x20Feb\x201997\x2008:21:57\x20
+SF:GMT\">\n<SCRIPT\x20language=\"javascript\"\x20type=\"text/javascript\">
+SF:<!--\n//--></SCRIPT>\n<!DOCTYPE\x20html>\n<SCRIPT\x20language=\"javascr
+SF:ipt\"\x20type=\"text/javascript\">\nvar\x20httpAutErrorArray\x20=\x20ne
+SF:w\x20Array\(\n3,\x201,\x20\"http://192\.168\.0\.1\",\x200,0\x20\);\n</S
+SF:CRIPT>\n<!DOCTYPE\x20html>\n<SCRIPT\x20language=\"javascript\"\x20type=
+SF:\"text/javascript\">\nvar\x20frameQrPara\x20=\x20new\x20Array\(\n0,\r\n
+SF:0,0\x20\);\n</SCRIPT>\n<!DOCTYPE\x20html>\n<SCRIPT\x20language=\"javasc
+SF:ript\"\x20type=\"text/javascript\">\nvar\x20frameNoteTPlogin\x20=\x20ne
+SF:w\x20Array\(\n0,\r\n\"http://www\.tplinklogin\.net\",\r\n0,0\x20\);\n</
+SF:SCRIPT>\n\r\n<SCRIPT\x20lan")%r(HTTPOptions,2E1,"HTTP/1\.1\x20501\x20No
+SF:t\x20Implemented\r\nServer:\x20Router\x20Webserver\r\nConnection:\x20cl
+SF:ose\r\nWWW-Authenticate:\x20Basic\x20realm=\"TP-Link\x20Wireless\x20N\x
+SF:20Router\x20WR940N\"\r\nContent-Type:\x20text/html\r\n\r\n<Script\x20la
+SF:nguage=JavaScript>\nvar\x20errorCode\x20=\x20501;\r\nvar\x20errorNote\x
+SF:20=\x20\"<p>File\x20not\x20found</p>\";\r\nvar\x20homeSite\x20=\x20\"ht
+SF:tp://192\.168\.0\.1\";\r\n</script>\n\r\n<HTML>\r\n<HEAD>\r\n<TITLE>Err
+SF:or</TITLE>\r\n<META\x20http-equiv=\"Content-Type\"\x20content=\"text/ht
+SF:ml;\x20charset=iso-8859-1\">\r\n</HEAD>\r\n<BODY>\r\n<DIV\x20style=\"pa
+SF:dding:0px\x2030px;\">\r\n<script\x20type=\"text/javascript\">\r\nfuncti
+SF:on\x20goHome\(\)\r\n{\r\n\twindow\.parent\.location\.href\x20=\x20homeS
+SF:ite;\r\n}\r\ndocument\.write\(\"<h1>\"\x20\+\x20errorCode\x20\+\"</h1><
+SF:hr>\"\);\r\ndocument\.write\(errorNote\);\r\n</script>\r\n<p><a\x20href
+SF:=\"#\"\x20onClick=\"goHome\(\)\">Go\x20Home</a></p>\r\n</DIV>\r\n</BODY
+SF:>\r\n</HTML>");
+MAC Address: D8:07:B6:B7:66:16 (TP-Link Technologies)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for Muhammad (192.168.0.104)
+Host is up (0.00088s latency).
+
+PORT     STATE  SERVICE       VERSION
+22/tcp   closed ssh
+80/tcp   closed http
+443/tcp  closed https
+3389/tcp closed ms-wbt-server
+8000/tcp closed http-alt
+8080/tcp open   http          SimpleHTTPServer 0.6 (Python 3.13.3)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat May 10 00:37:30 2025 -- 256 IP addresses (2 hosts up) scanned in 25.47 seconds
