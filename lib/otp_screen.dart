@@ -8,10 +8,10 @@ class OTPScreen extends StatefulWidget {
   final String userId;    // User ID from previous step
 
   const OTPScreen({
-    Key? key,
+    super.key,
     required this.userEmail,
     required this.userId,
-  }) : super(key: key);
+  });
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();

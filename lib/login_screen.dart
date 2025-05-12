@@ -75,10 +75,10 @@ class _LoginScreenState extends State<LoginScreen> {
         ElevatedButton(
           onPressed: () async {
             await FirebaseAuth.instance.verifyPhoneNumber(
-              phoneNumber: phoneController.text.trim(), // From your stored field
+              phoneNumber: phoneController.text.trim(),
               verificationCompleted: (PhoneAuthCredential credential) async {
                 await FirebaseAuth.instance.currentUser!.linkWithCredential(credential);
-                Navigator.pushReplacementNamed(context, '/otp');
+                Navigator.pushReplacementNamed(context, '/homes'); // Navigate to Homes
               },
               verificationFailed: (FirebaseAuthException e) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 email: emailController.text.trim(),
                 password: passwordController.text.trim(),
               );
-              Navigator.pushReplacementNamed(context, '/home');
+              Navigator.pushReplacementNamed(context, '/homes'); // Navigate to Homes
             } catch (e) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("Login error: $e")),
@@ -138,6 +138,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ],
     );
-
   }
 }

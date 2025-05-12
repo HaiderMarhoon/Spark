@@ -118,7 +118,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('"${reward.title}" redeemed successfully!'),
-                        backgroundColor: Colors.green[700],
+                        backgroundColor: Colors.green,
                         behavior: SnackBarBehavior.floating,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                       ),
@@ -157,7 +157,7 @@ class _RewardsScreenState extends State<RewardsScreen> {
       // FIX: Add a standard AppBar for the fixed title
       appBar: AppBar(
         title: const Text('Rewards'),
-        backgroundColor: colorScheme.surfaceContainerLowest, // Match background start
+        backgroundColor: Colors.green, // Match background start
         elevation: 0, // No shadow for seamless look
       ),
       // Use a gradient background for visual appeal

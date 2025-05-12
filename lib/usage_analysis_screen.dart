@@ -104,7 +104,7 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
       final int year = _selectedDate.year;
       final int month = _selectedDate.month;
       final DateTime firstDayOfMonth = DateTime(year, month, 1);
-      // End date is the first moment of the *next* month
+      // End date is the first moment of the next month
       final DateTime firstDayOfNextMonth = (month == 12)
           ? DateTime(year + 1, 1, 1) // Handle December -> January transition
           : DateTime(year, month + 1, 1);
@@ -179,7 +179,8 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
     }
 
     List<DailySummary> dailySummaries = [];
-    int daysInMonth = DateTime(_selectedDate.year, _selectedDate.month + 1, 0).day;
+    // Calculate the number of days in the selected month
+    final int daysInMonth = DateTime(_selectedDate.year, _selectedDate.month + 1, 0).day;
 
     for (int i = 1; i <= daysInMonth; i++) {
       final dayData = dataPerDay[i] ?? [];
@@ -240,32 +241,37 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
       print("Daily View Processed: Date=${DateFormat.yMd().format(_selectedDate)}, Spots=${spots.length}, Total Usage=$totalUsageForPeriod, Total Est Cost=$totalEstimatedCostForPeriod");
 
       // --- WEEKLY VIEW ---
-      // Shows the TOTAL *daily estimated cost* for each day of the month
-      // that falls within the relevant week(s) of the selected month.
+      // Shows the TOTAL daily estimated cost for each day in the 7-day period ending on _selectedDate
     } else if (_selectedTimePeriod == "Weekly") {
-      // For weekly view, we'll plot the estimated cost for each day of the month
-      // that falls within the selected month's days.
-      // The X-axis will represent the day of the month.
-      spots = _monthlyDailySummaries.map((summary) {
-        // X value is the day of the month
-        return FlSpot(summary.date.day.toDouble(), summary.estimatedCost);
+      // Calculate the 7-day period ending on _selectedDate
+      final DateTime endDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day); // End of the day
+      final DateTime startDate = endDate.subtract(const Duration(days: 6)); // Start of the day 6 days prior
+
+      // Filter daily summaries for the 7-day period
+      List<DailySummary> weeklySummaries = _monthlyDailySummaries.where((summary) =>
+      !summary.date.isBefore(startDate) && !summary.date.isAfter(endDate)
+      ).toList();
+
+      // Sort by date to ensure correct order for plotting
+      weeklySummaries.sort((a, b) => a.date.compareTo(b.date));
+
+      // Map daily summaries to FlSpot, using the day index within the week as X
+      spots = weeklySummaries.asMap().entries.map((entry) {
+        // X value is the index in the weeklySummaries list (0 to 6)
+        // This represents the position within the 7-day period
+        return FlSpot(entry.key.toDouble(), entry.value.estimatedCost);
       }).toList();
 
-      // Summary should show AVERAGE daily usage and AVERAGE daily estimated cost for the MONTH
-      // (as the chart shows daily values across the month context)
-      int daysWithDataCount = _monthlyDailySummaries.where((s) => s.totalUsage > 0).length;
-      double sumOfRawUsage = _monthlyDailySummaries.fold(0.0, (sum, item) => sum + item.totalUsage);
-      double sumOfEstimatedCost = _monthlyDailySummaries.fold(0.0, (sum, item) => sum + item.estimatedCost);
-
-      totalUsageForPeriod = (daysWithDataCount > 0) ? sumOfRawUsage / daysWithDataCount : 0.0;
-      totalEstimatedCostForPeriod = (daysWithDataCount > 0) ? sumOfEstimatedCost / daysWithDataCount : 0.0;
+      // Calculate total usage and estimated cost for the 7-day period
+      totalUsageForPeriod = weeklySummaries.fold(0.0, (sum, item) => sum + item.totalUsage);
+      totalEstimatedCostForPeriod = weeklySummaries.fold(0.0, (sum, item) => sum + item.estimatedCost);
 
 
-      print("Weekly View Processed (plotting daily costs): Spots=${spots.length}, Avg Daily Est Cost=$totalEstimatedCostForPeriod, Avg Daily Usage=$totalUsageForPeriod");
+      print("Weekly View Processed: Start=${DateFormat.yMd().format(startDate)}, End=${DateFormat.yMd().format(endDate)}, Spots=${spots.length}, Total Usage=$totalUsageForPeriod, Total Est Cost=$totalEstimatedCostForPeriod");
 
 
       // --- MONTHLY VIEW ---
-      // Shows the TOTAL *daily estimated cost* for each day of the month (1-31)
+      // Shows the TOTAL daily estimated cost for each day of the month (1-31)
     } else if (_selectedTimePeriod == "Monthly") {
       // For monthly view, we plot the estimated cost for each day of the month
       spots = _monthlyDailySummaries.map((summary) {
@@ -292,9 +298,13 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
         _displayTotalUsage = totalUsageForPeriod; // Total/Average raw usage for summary
         _displayEstimatedCost = totalEstimatedCostForPeriod; // Total/Average estimated cost for summary
 
-        // Generate recommendations based on the processed data (using raw usage total)
-        // Recommendations should likely be based on average daily usage/cost for consistency
-        _recommendations = _generateRecommendations(spots, _displayTotalUsage); // Use display total usage (average) for recs
+        // Generate recommendations based on the processed data
+        // For Weekly/Monthly, recommendations are based on average daily usage derived from the period's total
+        double averageDailyUsageForRecs = _selectedTimePeriod == "Daily" ? totalUsageForPeriod :
+        (_selectedTimePeriod == "Weekly" && spots.isNotEmpty ? totalUsageForPeriod / 7.0 : // Average over 7 days
+        (_selectedTimePeriod == "Monthly" && spots.isNotEmpty ? totalUsageForPeriod : 0.0)); // Monthly already uses average daily
+
+        _recommendations = _generateRecommendations(spots, averageDailyUsageForRecs);
       });
     }
   }
@@ -313,7 +323,9 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
     if (_selectedTimePeriod == "Daily") {
       periodContext = "for ${DateFormat.yMd().format(_selectedDate)}";
     } else if (_selectedTimePeriod == "Weekly") {
-      periodContext = "on average for weekdays in $monthYearStr";
+      final DateTime endDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
+      final DateTime startDate = endDate.subtract(const Duration(days: 6));
+      periodContext = "on average during the week ending ${DateFormat.yMd().format(_selectedDate)}";
     } else if (_selectedTimePeriod == "Monthly") {
       periodContext = "on average for days in $monthYearStr";
     }
@@ -362,16 +374,21 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
     else if (_selectedTimePeriod != "Daily" && currentSpots.isNotEmpty) {
       FlSpot peakCostSpot = currentSpots.reduce((curr, next) => curr.y > next.y ? curr : next);
       // Estimate average daily cost from average daily usage
-      double averageDailyCost = _calculateEstimatedCostForPeriod(currentAvgDailyTotal);
+      double averageDailyCostForRecs = _calculateEstimatedCostForPeriod(currentAvgDailyTotal);
+
 
       // Check if the peak average daily cost is significantly higher than the overall average daily cost
-      if (peakCostSpot.y > (averageDailyCost * 1.5)) { // e.g., > 1.5x average daily cost
+      if (peakCostSpot.y > (averageDailyCostForRecs * 1.5)) { // e.g., > 1.5x average daily cost
         String peakDayText = '';
         if (_selectedTimePeriod == "Weekly") {
-          // Find the date for the peak spot's day of the month
-          final peakDate = DateTime(_selectedDate.year, _selectedDate.month, peakCostSpot.x.toInt());
-          final weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+          // Find the date for the peak spot's day within the week
+          final DateTime endDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
+          final DateTime startDate = endDate.subtract(const Duration(days: 6));
+          final peakDate = startDate.add(Duration(days: peakCostSpot.x.toInt())); // Add index (0-6) to start date
+          final weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+          // Get the weekday name for the peak date
           peakDayText = weekdays.elementAtOrNull(peakDate.weekday - 1) ?? 'a specific day';
+
 
         } else if (_selectedTimePeriod == "Monthly") {
           peakDayText = 'around day ${peakCostSpot.x.toInt()}';
@@ -473,6 +490,11 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
     final textTheme = theme.textTheme;
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Usage Analysis'),
+        backgroundColor: Colors.green, // Use surface color for AppBar
+        elevation: 1, // Add slight elevation
+      ),
       // Use a SafeArea to avoid overlaps with system UI
       body: SafeArea(
         child: RefreshIndicator(
@@ -482,9 +504,6 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
             padding: const EdgeInsets.all(16.0),
             children: [
               // Header
-              Text("Usage Analysis", style: textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold, color: theme.colorScheme.primary)),
-              const SizedBox(height: 20),
-
               // Filters
               _buildFilterSection(context, theme, textTheme),
               const SizedBox(height: 20),
@@ -613,6 +632,14 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
     if (_chartSpots.isEmpty && !_isLoading && (_allUsageData.isNotEmpty || _monthlyDailySummaries.isNotEmpty)) {
       String dateString = _selectedTimePeriod == 'Daily' ? ' on ${DateFormat.yMd().format(_selectedDate)}' : '';
       String message = "No specific usage data available for '$_selectedUsageType' in the selected '$_selectedTimePeriod' view$dateString.";
+      // For weekly view, provide a more specific message if the selected date is in a month with no data
+      if (_selectedTimePeriod == 'Weekly') {
+        message = "No usage data found for '$_selectedUsageType' in the 7-day period ending on ${DateFormat.yMd().format(_selectedDate)}. Please select a date within a month that has data.";
+      } else if (_selectedTimePeriod == 'Monthly') {
+        message = "No usage data found for '$_selectedUsageType' in ${DateFormat('MMMM').format(_selectedDate)}. Please select a different month.";
+      }
+
+
       return Center(heightFactor: 5, child: Column( mainAxisAlignment: MainAxisAlignment.center, children: [
         Icon(Icons.info_outline_rounded, color: Colors.grey, size: 40), const SizedBox(height: 10),
         Text(message, style: textTheme.titleMedium, textAlign: TextAlign.center),
@@ -623,17 +650,27 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
     // --- Main Data Display ---
     final totalUsage = _displayTotalUsage;
     final estimatedCost = _displayEstimatedCost;
-    String monthYearStr = DateFormat('MMMM').format(_selectedDate);
+    // For weekly view, the date context is the 7-day range
+    String dateContextString = "";
+    if (_selectedTimePeriod == "Daily") {
+      dateContextString = "Showing data for: ${DateFormat('EEE, MMM d, yyyy').format(_selectedDate)}";
+    } else if (_selectedTimePeriod == "Weekly") {
+      final DateTime endDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
+      final DateTime startDate = endDate.subtract(const Duration(days: 6));
+      dateContextString = "Showing data for: ${DateFormat.yMd().format(startDate)} - ${DateFormat.yMd().format(endDate)}";
+    } else if (_selectedTimePeriod == "Monthly") {
+      dateContextString = "Showing data for: ${DateFormat('MMMM yyyy').format(_selectedDate)}";
+    }
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Display selected month context
+        // Display selected date/period context
         Padding(
           padding: const EdgeInsets.only(bottom: 16.0, top: 8.0),
           child: Text(
-              "Showing data for: $monthYearStr" +
-                  (_selectedTimePeriod == "Daily" ? " (${DateFormat('EEE, MMM d').format(_selectedDate)})" : ""),
+              dateContextString,
               style: textTheme.titleSmall?.copyWith(color: theme.colorScheme.outline)),
         ),
 
@@ -643,13 +680,14 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
 
         // Chart Title
         Text(
-            _selectedTimePeriod == "Weekly" ? "Total Daily Estimated Cost by Day of Month" : // Adjusted title for clarity
+            _selectedTimePeriod == "Weekly" ? "Estimated Daily Cost for the Week" : // Adjusted title for clarity
             _selectedTimePeriod == "Monthly" ? "Total Daily Estimated Cost by Day of Month" :
             "Estimated Hourly Cost Pattern",
             style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)
         ),
         Text( // Subtitle indicating context
-            _selectedTimePeriod != "Daily" ? "(Based on data from $monthYearStr)" : "",
+            _selectedTimePeriod == "Weekly" ? "(Week ending ${DateFormat.yMd().format(_selectedDate)})" :
+            _selectedTimePeriod == "Monthly" ? "(Based on data from ${DateFormat('MMMM yyyy').format(_selectedDate)})" : "",
             style: textTheme.bodySmall?.copyWith(color: theme.colorScheme.outline)
         ),
         const SizedBox(height: 8),
@@ -668,9 +706,13 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
   // Builds the usage summary box
   Widget _buildUsageSummary(BuildContext context, ThemeData theme, TextTheme textTheme, double totalUsage, double estimatedCost) {
     final unit = _getUnit();
-    // Adjust label based on view - Summary still shows average daily for Weekly/Monthly
-    String usageLabel = _selectedTimePeriod == "Daily" ? "Total Usage" : "Avg. Daily Usage";
-    String costLabel = _selectedTimePeriod == "Daily" ? "Est. Cost for Day" : "Est. Cost (Avg. Day)";
+    // Adjust label based on view
+    String usageLabel = _selectedTimePeriod == "Daily" ? "Total Usage" :
+    _selectedTimePeriod == "Weekly" ? "Total Usage for Week" :
+    "Avg. Daily Usage"; // Monthly view shows average daily
+    String costLabel = _selectedTimePeriod == "Daily" ? "Est. Cost for Day" :
+    _selectedTimePeriod == "Weekly" ? "Est. Cost for Week" :
+    "Est. Cost (Avg. Day)"; // Monthly view shows average daily
 
     final displayType = _selectedUsageType.isNotEmpty ? _selectedUsageType[0].toUpperCase() + _selectedUsageType.substring(1) : '';
     final usageIcon = _selectedUsageType == 'electricity' ? Icons.flash_on_rounded : Icons.opacity_rounded;
@@ -707,9 +749,23 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
 
     // --- Dynamic Axis Configuration ---
     double minXValue = 0, maxXValue = 24, bottomInterval = 4; // Defaults for Daily
-    String Function(double) bottomTitleFormatter = (v) => v.toInt().toString().padLeft(2, '0'); // Default: Hour
+    String Function(double) bottomTitleFormatter = (v) => v.toInt().toString().padLeft(2, '0'); // Default: Hour Label
 
-    if (_selectedTimePeriod == "Weekly" || _selectedTimePeriod == "Monthly") {
+    if (_selectedTimePeriod == "Weekly") {
+      minXValue = 0; // Start index for the week
+      maxXValue = 6; // End index for the week (7 days total)
+      bottomInterval = 1; // Show a label for each day
+      final DateTime endDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
+      final DateTime startDate = endDate.subtract(const Duration(days: 6));
+      final weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      bottomTitleFormatter = (v) {
+        final dayIndex = v.toInt(); // Index 0-6
+        if (dayIndex < 0 || dayIndex > 6) return '';
+        // Calculate the actual date for this index and get the weekday
+        final dateForSpot = startDate.add(Duration(days: dayIndex));
+        return weekdays.elementAtOrNull(dateForSpot.weekday - 1) ?? '';
+      };
+    } else if (_selectedTimePeriod == "Monthly") {
       minXValue = 1;
       maxXValue = DateTime(_selectedDate.year, _selectedDate.month + 1, 0).day.toDouble(); // Max X is days in month
       bottomInterval = 7; // Show labels every 7 days (approximately)
@@ -742,7 +798,7 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
 
     // Find a 'nice' interval close to the target
     // This is a simplified approach; a more robust one would involve logarithms
-    List<double> niceIntervals = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0]; // Added larger intervals
+    List<double> niceIntervals = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0]; // Added larger intervals
     double bestInterval = niceIntervals.first;
     double minDiff = (targetInterval - bestInterval).abs();
 
@@ -791,7 +847,8 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
     int gridLineAlpha = 30; // Adjusted alpha for grid lines
 
     return Container(
-      padding: const EdgeInsets.only(top: 16, right: 8), // Add padding
+      // Adjusted padding for better spacing on all sides
+      padding: const EdgeInsets.only(top: 16, bottom: 16, left: 8, right: 16),
       height: 350, // Fixed height for the chart area
       child: LineChart(
         LineChartData(
@@ -832,7 +889,8 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
                 if (isLabelValue)
                 {
                   String labelText = value.toStringAsFixed(3);
-                  if ((value - minYValue).abs() < tolerance) { // Only add BHD to the minimum value label
+                  // Only add BHD to the minimum and maximum value labels for clarity
+                  if ((value - minYValue).abs() < tolerance || (value - maxYValue).abs() < tolerance) {
                     labelText += ' BHD';
                   }
                   // Pass the meta object to the SideTitleWidget
@@ -898,7 +956,27 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
                       title = '${hr.toString().padLeft(2,'0')}:${min.toString().padLeft(2,'0')}';
                       valueText = '${estimatedCost.toStringAsFixed(3)} BHD/hr'; // Show estimated cost per hour
 
-                    } else if (_selectedTimePeriod == "Weekly" || _selectedTimePeriod == "Monthly") {
+                    } else if (_selectedTimePeriod == "Weekly") {
+                      // Find the corresponding DailySummary for this spot's index (0-6)
+                      final DateTime endDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
+                      final DateTime startDate = endDate.subtract(const Duration(days: 6));
+                      final dateForSpot = startDate.add(Duration(days: spot.x.toInt()));
+
+                      final dailySummary = _monthlyDailySummaries.firstWhere(
+                              (summary) => summary.date.year == dateForSpot.year && summary.date.month == dateForSpot.month && summary.date.day == dateForSpot.day,
+                          orElse: () => DailySummary(date: dateForSpot, totalUsage: 0.0, estimatedCost: estimatedCost) // Default if not found
+                      );
+
+                      final weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                      final dayOfWeek = dailySummary.date.weekday;
+                      title = DateFormat.yMd().format(dailySummary.date) + ' (${weekdays.elementAtOrNull(dayOfWeek - 1) ?? ''})'; // Show date and weekday
+
+                      valueText = '${estimatedCost.toStringAsFixed(3)} BHD/day'; // Show estimated cost per day
+                      // Display the daily total usage for the specific day
+                      additionalInfo = 'Usage: ${dailySummary.totalUsage.toStringAsFixed(2)} ${_getUnit()}/day';
+
+
+                    } else if (_selectedTimePeriod == "Monthly") {
                       final dayOfMonth = spot.x.toInt();
                       // Find the corresponding DailySummary to get the raw usage
                       final dailySummary = _monthlyDailySummaries.firstWhere(
@@ -906,13 +984,8 @@ class _UsageAnalysisScreenState extends State<UsageAnalysisScreen> {
                           orElse: () => DailySummary(date: DateTime(_selectedDate.year, _selectedDate.month, dayOfMonth), totalUsage: 0.0, estimatedCost: estimatedCost) // Default if not found
                       );
 
-                      if (_selectedTimePeriod == "Weekly") {
-                        final weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-                        final dayOfWeek = dailySummary.date.weekday;
-                        title = weekdays.elementAtOrNull(dayOfWeek - 1) ?? '';
-                      } else { // Monthly
-                        title = 'Day ${dayOfMonth}';
-                      }
+                      title = 'Day ${dayOfMonth}';
+
 
                       valueText = '${estimatedCost.toStringAsFixed(3)} BHD/day'; // Show estimated cost per day
                       // Display the daily total usage for the specific day

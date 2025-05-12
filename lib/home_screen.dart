@@ -17,10 +17,10 @@ class HomeScreen extends StatefulWidget {
   final String userEmail;
 
   const HomeScreen({
-    Key? key,
+    super.key,
     required this.userId,
     required this.userEmail,
-  }) : super(key: key);
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -47,7 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onItemTapped(int index) {
-    if (index < _screens.length) { // Ensure index is within bounds
+    if (index < _screens.length) {
+      // Ensure index is within bounds
       setState(() {
         _selectedIndex = index;
       });
@@ -55,7 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
       print("Error: _onItemTapped called with out-of-bounds index: $index");
     }
   }
-
   @override
   Widget build(BuildContext context) {
     print("HomeScreen: build() called with selectedIndex: $_selectedIndex");
@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: _selectedIndex == 0
           ? AppBar(
         title: Text("${auth.userName ?? 'User'}'s Home"),
+        backgroundColor: Colors.green,
         actions: [
           IconButton(
             icon: const Icon(Icons.account_circle),
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       )
-          : null,
+          : null, //  <- Here was the error.  The : null was missing
       body: IndexedStack(
         index: _selectedIndex,
         children: _screens,

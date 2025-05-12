@@ -6,6 +6,8 @@ import 'firebase_options.dart';
 import 'welcome_screen.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
+import 'homes.dart';
+import 'homes_rig.dart';
 import 'otp_screen.dart';
 import 'home_screen.dart';
 import 'splash_screen.dart';
@@ -80,6 +82,8 @@ class MyApp extends StatelessWidget {
       '/welcome': (context) => const WelcomeScreen(),
       '/login': (context) => const LoginScreen(),
       '/register': (context) => const RegisterScreen(),
+      '/homes': (context) => const HomesPage(),
+      '/homes_rig': (context) => const HomeRegistrationPage(),
       '/otp': (context) {
         // Note: This route might not work correctly without proper arguments
         // if accessed directly without the phone verification flow.
