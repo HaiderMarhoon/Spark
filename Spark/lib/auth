@@ -1,0 +1,45 @@
+import 'package:flutter/foundation.dart';
+
+class AuthService with ChangeNotifier {
+  bool _isLoggedIn = false;
+  String? _userId;
+  String? _userName;
+  String? _userEmail;
+
+  bool get isLoggedIn => _isLoggedIn;
+  String? get userId => _userId;
+  String? get userName => _userName;
+  String? get userEmail => _userEmail;
+
+  Future<void> login(String email, String password) async {
+    // API call to login
+    _isLoggedIn = true;
+    _userId = "user123"; // Get from API response
+    _userName = "Mohammed"; // Get from API response
+    _userEmail = email;
+    notifyListeners();
+  }
+
+  Future<void> register(String email, String password, String name) async {
+    // API call to register
+    _isLoggedIn = true;
+    _userId = "new_user456"; // Get from API response
+    _userName = name;
+    _userEmail = email;
+    notifyListeners();
+  }
+
+  Future<void> verifyOtp(String otp) async {
+    // API call to verify OTP
+    _isLoggedIn = true;
+    notifyListeners();
+  }
+
+  Future<void> logout() async {
+    _isLoggedIn = false;
+    _userId = null;
+    _userName = null;
+    _userEmail = null;
+    notifyListeners();
+  }
+}
